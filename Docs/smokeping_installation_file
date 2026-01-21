@@ -1,0 +1,80 @@
+Installation smokeping 3mins with apache2
+===============================================
+
+
+# apt update
+# apt install smokeping
+
+mail server config >> internet site 
+
+# apt install apache2 sendmail
+# vim /etc/smokeping/config.d/pathnames
+  comment >>#sendmail
+
+# vim /etc/smokeping/config.d/General
+   add cgiurl = http://server-ip/cgi-bin/smokeping.cgi 
+   i already test with localhost so this path full url is http://localhost/cgi-bin/smokeping.cgi
+   
+# a2enmod cgi ( essential need module) 
+
+# systemctl restart apache2
+
+# systemctl restart smokeping
+
+# vim /etc/smokeping/config.d/Targets
+
+
+custome add in /etc/smokeping/config.d/Targets
+
+*** Targets ***
+
+probe = FPing
+
+menu = Top
+title = Network Latency & Traffic Monitoring
+remark = Ubuntu 24.04 SmokePing
+
+#################################
++ LocalNetwork
+menu = Local Network
+title = Local Network Monitoring
+
+++ Localhost
+menu = Localhost
+title = Localhost (127.0.0.1)
+host = 127.0.0.1
+
+++ Gateway10_4
+menu = Gateway 10.4.0.1
+title = Gateway 10.4 Latency
+host = 10.4.0.1
+
+#################################
++ VoiceNetwork
+menu = Voice Network
+title = CS Voice Network
+
+++ CS_Voice_172.17
+menu = CS Voice 172.17.115.6
+title = CS Voice Server (172.17)
+host = cs-voice-172.17
+
+#################################
++ Internet
+menu = Internet
+title = Internet Monitoring
+
+++ GoogleDNS
+menu = Google DNS
+title = Google DNS (8.8.8.8)
+host = 8.8.8.8
+
+
+
+Broswe your some browser this path
+# http://localhost/cgi-bin/smokeping.cgi
+
+
+That's all 
+Thanks you for watching !!
+
